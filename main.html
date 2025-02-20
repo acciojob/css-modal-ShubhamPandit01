@@ -56,6 +56,7 @@
       background-color: #007BFF;
       color: white;
       text-align: center;
+      position: relative;
     }
 
     /* Modal Body */
@@ -100,11 +101,11 @@
   <button id="openModal">Open Modal</button>
 
   <!-- Modal Structure -->
-  <div class="modal" id="myModal">
+  <div class="modal" id="myModal" role="dialog" aria-labelledby="modalHeader" aria-hidden="true">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Modal Header</h2>
-        <button class="close-modal" id="closeModal">&times;</button>
+        <h2 id="modalHeader">Modal Header</h2>
+        <button class="close-modal" id="closeModal" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
         <p>Modal Body Content</p>
@@ -121,17 +122,20 @@
     // Open the modal when the button is clicked
     openModalBtn.addEventListener('click', () => {
       modal.classList.add('show-modal');
+      modal.setAttribute('aria-hidden', 'false'); // Make modal visible to screen readers
     });
 
     // Close the modal when the close button is clicked
     closeModalBtn.addEventListener('click', () => {
       modal.classList.remove('show-modal');
+      modal.setAttribute('aria-hidden', 'true'); // Make modal hidden to screen readers
     });
 
     // Close the modal if clicked outside the modal content
     window.addEventListener('click', (event) => {
       if (event.target === modal) {
         modal.classList.remove('show-modal');
+        modal.setAttribute('aria-hidden', 'true'); // Hide modal for screen readers
       }
     });
   </script>
